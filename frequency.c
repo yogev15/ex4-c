@@ -153,17 +153,11 @@ int main(int argc, char* argv[])
 	trei_root = trei(trei_root);	
 	
 	if(argc > 1 && *argv[1] == 'r')
-	{
 			down_order_lexicographic_print(trei_root);
-			printf("\n");
-	}
 	else
 	{
 		if(argc == 1)
-		{
 			up_order_lexicographic_print(trei_root);
-			printf("\n");
-		}
 	}
 	free_memory(trei_root);
 	
