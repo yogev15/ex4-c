@@ -14,8 +14,8 @@ typedef struct node
 	struct node* children[NUM_LETTERS];
 } node;
 
-
-
+//a function that gets a letter, creats and returns a node with a dynamic memory
+//if the allocation of the memory didn't succeed returns NULL
 node* create_node(char c)
 {
 	node* new_node = (node*)calloc(1,sizeof(node));
@@ -33,6 +33,8 @@ node* create_node(char c)
 	return new_node;
 }
 
+//a function that gets a node pointer and a letter ,it adds a child in the right place with the input letter
+//if there is a child with the specific letter the function returns it  
 node* insert(node* root, char c)
 {
 	node* temp;
@@ -70,6 +72,7 @@ node* insert(node* root, char c)
 	return temp;
 }
 
+//check if a char is a letter or not
 int is_a_letter(char c)
 {
 	if((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
@@ -78,6 +81,9 @@ int is_a_letter(char c)
 		return FALSE;
 }
 
+
+//this fucntion builts a tree from the standart input, every node has its uniqe letter and every path represents a word
+//not all nodes represent a word, but only the nodes that are an end of one.
 node* trei(node* root)
 {
 	char c = getchar();
@@ -108,6 +114,7 @@ node* trei(node* root)
 	return root;
 }
 
+//printing the trei in a lexicographic
 void up_order_lexicographic_print(node* root)
 {
 	if(root -> end_of_word == TRUE)
@@ -121,6 +128,7 @@ void up_order_lexicographic_print(node* root)
 	}
 }
 
+//reverse lexicographic printing the trei 
 void down_order_lexicographic_print(node* root)
 {
 	if(root -> end_of_word == TRUE)
@@ -132,6 +140,7 @@ void down_order_lexicographic_print(node* root)
 	}
 }
 
+//this fucntion frees the dynamic memory alocated in this project at the end of the main
 void free_memory(node* root)
 {
 	for(int i = 0; i < NUM_LETTERS; i++)
@@ -144,12 +153,14 @@ void free_memory(node* root)
 }
 
 
-
+//in this main function we are bulding a trei of nodes and prints the words in it
+//if reversed wanted enter the input r, other wise for default
 int main(int argc, char* argv[])
 {
 	node* trei_root = create_node(0);
 	if(trei_root == NULL)
 		return 0;
+		
 	trei_root = trei(trei_root);	
 	
 	if(argc > 1 && *argv[1] == 'r')
