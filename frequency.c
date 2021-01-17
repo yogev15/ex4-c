@@ -111,19 +111,21 @@ node* trei(node* root)
 void up_order_lexicographic_print(node* root)
 {
 	if(root -> end_of_word == TRUE)
-			printf("%s %ld\n", root -> word, root ->count);
+		printf("%s %ld\n", root -> word, root ->count);
 	for(int i = 0; i < NUM_LETTERS; i++)
 	{
 		if(root -> children[i] != NULL)
+		{
 			up_order_lexicographic_print(root -> children[i]);
+		}
 	}
 }
 
 void down_order_lexicographic_print(node* root)
 {
 	if(root -> end_of_word == TRUE)
-			printf("%s %ld\n", root -> word, root -> count);
-	for(int i = NUM_LETTERS; i > 0; i--)
+		printf("%s %ld\n", root -> word, root -> count);
+	for(int i = NUM_LETTERS - 1; i >= 0; i--)
 	{
 		if(root -> children[i] != NULL)
 			down_order_lexicographic_print(root -> children[i]);
@@ -141,12 +143,15 @@ void free_memory(node* root)
 	free(root);
 }
 
+
+
 int main(int argc, char* argv[])
 {
 	node* trei_root = create_node(0);
 	if(trei_root == NULL)
 		return 0;
-	trei_root = trei(trei_root);
+	trei_root = trei(trei_root);	
+	
 	if(argc > 1 && *argv[1] == 'r')
 			down_order_lexicographic_print(trei_root);
 	else
