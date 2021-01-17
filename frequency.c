@@ -80,7 +80,7 @@ int is_a_letter(char c)
 
 node* trei(node* root)
 {
-	char c;
+	char c = getchar();
 	node* temp_root = root;
 	while(c != -1)
 	{	
@@ -93,7 +93,6 @@ node* trei(node* root)
 				temp_root = insert(temp_root, c);			
 			}
 			c = getchar();
-			//printf("%c\n",c);
 		}
 		if(temp_root -> end_of_word == FALSE)
 		{
@@ -111,7 +110,7 @@ node* trei(node* root)
 
 void up_order_lexicographic_print(node* root)
 {
-	if(root -> end_of_word)
+	if(root -> end_of_word == TRUE)
 			printf("%s %ld\n", root -> word, root ->count);
 	for(int i = 0; i < NUM_LETTERS; i++)
 	{
@@ -122,7 +121,7 @@ void up_order_lexicographic_print(node* root)
 
 void down_order_lexicographic_print(node* root)
 {
-	if(root -> end_of_word)
+	if(root -> end_of_word == TRUE)
 			printf("%s %ld\n", root -> word, root -> count);
 	for(int i = NUM_LETTERS; i > 0; i--)
 	{
