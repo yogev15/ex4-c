@@ -18,7 +18,7 @@ typedef struct node
 
 node* create_node(char c)
 {
-	node* new_node = (node*)malloc(sizeof(node));
+	node* new_node = (node*)calloc(1,sizeof(node));
 	if(new_node == NULL)
 		return NULL;
 	
@@ -70,29 +70,30 @@ node* insert(node* root, char c)
 	return temp;
 }
 
-int if_a_letter(char c)
+int is_a_letter(char c)
 {
 	if((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
-		return 1;
+		return TRUE;
 	else
-		return 0;
+		return FALSE;
 }
 
-void trei(node* root)
+node* trei(node* root)
 {
-	char c = getchar();
+	char c;
 	node* temp_root = root;
-	while(c != EOF)
-	{
-		while(c != '\n' && c != '\t' && c != '\r' && c != '\0' && c !=' ' && c != EOF)
+	while(c != -1)
+	{	
+		while(c != '\n' && c != '\t' && c != '\r' && c != '\0' && c != ' ' && c != -1)
 		{
-			if(if_a_letter(c))
+			if(is_a_letter(c))
 			{
 				if(c >= 'A' && c <= 'Z')
-					c = c - 'a' - 'A';
+					c = c + ('a' - 'A');
 				temp_root = insert(temp_root, c);			
 			}
 			c = getchar();
+			printf("%c\n",c);
 		}
 		if(temp_root -> end_of_word == FALSE)
 		{
@@ -101,11 +102,11 @@ void trei(node* root)
 		}
 		else
 			temp_root -> count++;
-		while(c == '\n' || c == '\t' || c == '\r' || c == '\0' || c == ' ' || c == EOF)
+		while(c == '\n' || c == '\t' || c == '\r' || c == '\0' || c == ' ')
 			c = getchar();
 		temp_root = root;
 	}
-	//printf("finished\n");
+	return root;
 }
 
 void up_order_lexicographic_print(node* root)
@@ -143,17 +144,16 @@ void free_memory(node* root)
 
 int main(int argc, char* argv[])
 {
-	//printf("hello");
 	node* trei_root = create_node(0);
 	if(trei_root == NULL)
 		return 0;
-	trei(trei_root);
+	trei_root = trei(trei_root);
 	if(argc > 1 && *argv[1] == 'r')
 			down_order_lexicographic_print(trei_root);
 	else
 	{
 		if(argc == 1)
-		up_order_lexicographic_print(trei_root);
+			up_order_lexicographic_print(trei_root);
 	}
 	free_memory(trei_root);
 	
