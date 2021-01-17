@@ -33,14 +33,6 @@ node* create_node(char c)
 	return new_node;
 }
 
-int is_a_letter(char c)
-{
-	if(c >= 'a' || c <= 'z')
-		return TRUE;
-	else
-		return FALSE;
-}
-
 node* insert(node* root, char c)
 {
 	node* temp = create_node(c);
@@ -75,7 +67,7 @@ node* insert(node* root, char c)
 	return temp;
 }
 
-boolean if_a_letter(char c)
+int if_a_letter(char c)
 {
 	if((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
 		return TRUE;
@@ -97,11 +89,15 @@ void trei(node* root)
 					c = c - 'a' - 'A';
 				temp_root = insert(temp_root, c);			
 			}
+			//printf("%c\n", c);
 			c = getchar();
 		}
+		//printf("%s\n", temp_root -> word);
+		//printf("%ld\n", strlen(temp_root -> word));
+
 		temp_root -> end_of_word = TRUE;
 		temp_root -> count++;
-		while(c == '\n' && c == '\t' && c == '\r' && c == '\0' && c == ' ' && c == EOF)
+		while(c == '\n' || c == '\t' || c == '\r' || c == '\0' || c == ' ' || c == EOF)
 			c = getchar();
 		temp_root = root;
 	}
