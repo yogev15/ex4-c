@@ -70,9 +70,9 @@ node* insert(node* root, char c)
 int if_a_letter(char c)
 {
 	if((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
-		return TRUE;
+		return 1;
 	else
-		return FALSE;
+		return 0;
 }
 
 void trei(node* root)
@@ -83,24 +83,22 @@ void trei(node* root)
 	{
 		while(c != '\n' && c != '\t' && c != '\r' && c != '\0' && c !=' ' && c != EOF)
 		{
-			if(if_a_letter(c) == TRUE)
+			if(if_a_letter(c))
 			{
 				if(c >= 'A' && c <= 'Z')
 					c = c - 'a' - 'A';
 				temp_root = insert(temp_root, c);			
 			}
-			//printf("%c\n", c);
 			c = getchar();
 		}
-		//printf("%s\n", temp_root -> word);
-		//printf("%ld\n", strlen(temp_root -> word));
-
+		
 		temp_root -> end_of_word = TRUE;
 		temp_root -> count++;
 		while(c == '\n' || c == '\t' || c == '\r' || c == '\0' || c == ' ' || c == EOF)
 			c = getchar();
 		temp_root = root;
 	}
+	printf("finished");
 }
 
 void up_order_lexicographic_print(node* root)
@@ -138,6 +136,7 @@ void free_memory(node* root)
 
 int main(int argc, char* argv[])
 {
+	printf("hello");
 	node* trei_root = create_node(0);
 	if(trei_root == NULL)
 		return 0;
