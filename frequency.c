@@ -93,7 +93,7 @@ node* trei(node* root)
 				temp_root = insert(temp_root, c);			
 			}
 			c = getchar();
-			printf("%c\n",c);
+			//printf("%c\n",c);
 		}
 		if(temp_root -> end_of_word == FALSE)
 		{
